@@ -4,19 +4,17 @@
 
 .pageHeader {
 	-webkit-font-smoothing: antialiased;
-    font-family: "Helvetica", Sans;
-    color: rgb(244, 244, 236);
+  color: rgb(244, 244, 236);
 	padding-top: 145px;
 	padding-left: 94px;
 	padding-bottom: 30px;
-    width: 100%;
+  width: 100%;
 }
 
 .pageHeader a {
     text-transform: lowercase;
     color: rgb(244, 244, 236);
     display: block;
-    font-family: 'Helvetica', Sans;
     font-weight: bold;
     font-size: 70px;
     height: 80px;
