@@ -146,11 +146,7 @@
                 </div>
 
                 <div class="packageIndex">
-                    <a href="#Exceptions"><span class="packageIndexName">Exceptions</span></a>
-                    <a href="#Exceptions-Raise"><span class="classIndex"><span class="classIndexName">Raise</span></span></a>
-                    <a href="#ExceptionsTry-and-Catch"><span class="classIndex"><span class="classIndexName">try, catch</span></span></a>
-                    <a href="#Exceptions-Pass"><span class="classIndex"><span class="classIndexName">Pass</span></span></a>
-                    <a href="#Exceptions-Custom-Exceptions"><span class="classIndex"><span class="classIndexName">Custom Exceptions</span></span></a>
+                    <a href="#Panics"><span class="packageIndexName">Panics</span></a>
                 </div>
 
                 <div class="packageIndex">
@@ -1322,89 +1318,17 @@ Io> futureSend(q); nil
 
     </div> <!-- end chapter -->
     <div class="chapter">
-                    <h2>Exceptions<a name="Exceptions"></a></h2>
+      <h2>Panics<a name="Panics"></a></h2>
+      <p>A limited number of operations can <em>panic</em>.</p>
+      <p>A panic aborts the running application and shuts down the runtime.</p>
+      <p>These operations are:</p>
 
-                    <a name="Exceptions-Raise"></a>
-                    <h3>Raise</h3>
-
-
-
-                    An exception can be raised by calling raise() on an exception proto.
-
-                    <pre>
-Exception raise("generic foo exception")
-</pre>
-
-                    <!--
-<pre><i>
-exceptionProto raise(&lt;description&gt;)
-</i></pre>
-
-There are three predefined children of the Exception proto: Error, Warning and Notification. Examples: 
-
-<pre>
-Exception raise("generic foo exception")
-Warning raise("No defaults found, creating them")
-Error raise("Not enough memory")
-</pre>
--->
-
-
-
-                    <a name="Exceptions-Try-and-Catch"></a>
-                    <h3>Try and Catch</h3>
-
-
-
-
-                    To catch an exception, the try() method of the Object proto is used. try() will catch any exceptions that occur within it and return the caught exception or nil if no exception is caught.
-
-                    <pre><i>
-e := try(&lt;doMessage&gt;)
-</i></pre> To catch a particular exception, the Exception catch() method can be used. Example:
-
-                    <pre>
-e := try(
-    // ...
-) 
-
-e catch(Exception,
-    writeln(e coroutine backTraceString)
-)
-</pre> The first argument to catch indicates which types of exceptions will be caught. catch() returns the exception if it doesn't match and nil if it does.
-
-
-
-                    <a name="Exceptions-Pass"></a>
-                    <h3>Pass</h3>
-
-
-                    To re-raise an exception caught by try(), use the pass method. This is useful to pass the exception up to the next outer exception handler, usually after all catches failed to match the type of the current exception:
-
-                    <pre>
-e := try(
-    // ...
-) 
-
-e catch(Error,
-    // ...
-) catch(Exception,
-    // ...
-) pass
-</pre>
-
-
-
-                    <a name="Exceptions-Custom"></a>
-                    <h3>Custom Exceptions</h3>
-
-
-
-                    Custom exception types can be implemented by simply cloning an existing Exception type:
-
-                    <pre>
-MyErrorType := Error clone
-</pre>
+      <ul>
+        <li><code>assert</code> and the methods in module <code>Assert</code>, if the assertion is not true</li>
+        <li><code>Array#get</code> and <code>Array#set</code>, if the supplied index is not within the bounds of the array</li>
+        <li><code>Int64#div</code>, <code>Int32#div</code> and <code>UInt8#div</code>, if the divisor is 0</li>
+        <li><code>as</code>, if the value is cast to an incompatible type</li>
+      </ul>
 
     </div> <!-- end chapter -->
     <div class="chapter">
